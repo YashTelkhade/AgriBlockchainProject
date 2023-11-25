@@ -1,3 +1,6 @@
+/*
+	This file contains the code which will fetch number of items in the supply chain from smart contract
+*/
 const { Web3 } = require('web3');
 const web3 = new Web3('http://127.0.0.1:8545');
 
@@ -86,7 +89,6 @@ const abiOfContract = [
 
 const contractAddress = "0x88e87aa9cc459db5cb513df52e653e9710085bb1";
 const supplyChainContract = new web3.eth.Contract(abiOfContract, contractAddress);
-const accountAddress = "0x29D3c09Ac96485F80bfc8FD75C5207a4356EC109";
 
 async function getNumberOfItemsInSupplyChain() {
     try {

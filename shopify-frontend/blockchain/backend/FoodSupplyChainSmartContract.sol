@@ -5,28 +5,40 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 
 contract FoodSupplyChainSmartContract {
     
+    /*
+        Data structure that holds the information of a stage in the supplu chain of a product
+    */
     struct SupplyChainStage {
-        string stageName;
-        string notes;
-        string price;
-        string timestamp;
-        string location;
+        string stageName;       // Name of this stage, e.g. "Retail"
+        string notes;           // Any notes
+        string price;           // Price of the item in this stage
+        string timestamp;       // Timestamp when the item entered this stage
+        string location;        // Location of the item in this stage
     }
 
+    /*
+        An item in the supply chain
+    */
     struct Item {
-        string name;
-        string description;
-        string category;
-        string imageURL;
-        string slug;
-        uint identifier;
-        uint lastStageNumber;
-        mapping (uint => SupplyChainStage) stages;
+        string name;            // Name of the item e.g. Apple
+        string description;     // Description of item e.g. Fresh homegrown apples
+        string category;        // Category of item e.g. Fruit
+        string imageURL;        // URL to the image of item that will be displayed on website
+        string slug;            // Identifier of the item in website
+        uint identifier;        // Unique identifier of each item
+        uint lastStageNumber;   // Number of stages that this item has been in
+        mapping (uint => SupplyChainStage) stages;  // Data structure storing the stages this item has been through in its life cycle
     }
 
-    mapping(uint => Item) itemsInSupplyChain;
-    uint numberOfItems;
+    mapping(uint => Item) itemsInSupplyChain;   // Data structure for all items in the supply chain
+    uint numberOfItems;            // Number of items in the supply chain
 
+    /*
+        Adds new item in the supply chain
+        itemInfo : primary information of the item
+        stageInfo : information about the first stage in the life cycle of this item
+        Returns 1 if the operation was successful
+    */
     function addNewItem(string[] calldata itemInfo, string[] calldata stageInfo) public returns (uint) {
 
         SupplyChainStage memory nextStage = SupplyChainStage({
@@ -50,6 +62,11 @@ contract FoodSupplyChainSmartContract {
         return 1;
     }
 
+    /*
+        Adds a new state in the life cycle of an existing item
+        productID : ID of the item which is being moved ahead in the supply chain
+        stageInfo : information about the next stage of the current item's life cycle
+    */
     function addNewState(uint productID, string[] calldata stageInfo) public returns (uint result) {
 
         result = 1;
@@ -71,10 +88,16 @@ contract FoodSupplyChainSmartContract {
         }
     }
 
+    /*
+        Returns the number of items in the supply chain
+    */
     function getNumberOfItemsInSupplyChain() public view returns(uint) {
         return numberOfItems;
     }
 
+    /*
+        Returns information about an item with the given productID in the form of a JSON object
+    */
     function getProductInfo(uint productID) public view returns(string memory) {
         string memory jsonData = "{";
 
