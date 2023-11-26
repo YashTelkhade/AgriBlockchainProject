@@ -1,54 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import Script from 'next/script'
 
+const Checkout = ({ cart, userProfile }) => {
 
-const Checkout = ({ cart,userProfile }) => {
-
-  useEffect(()=>{
-    console.log(userProfile)   
-    if(userProfile!=0 && userProfile!=null){
-    setform(userProfile)} 
+  useEffect(() => {
+    console.log(userProfile)
+    if (userProfile != 0 && userProfile != null) {
+      setform(userProfile)
+    }
   })
 
   const [subtotal, setsubtotal] = useState(0)
-
   const [form, setform] = useState({ username: "", email: "", contact: "", address: "" })
 
   useEffect(() => {
     let mytotal = 0
-
     for (let index = 0; index < cart.length; index++) {
       mytotal = mytotal + cart[index][1]
 
     }
     setsubtotal(mytotal)
-
   }, [])
 
   const handleChange = ((e) => {
-
     setform({ ...form, [e.target.name]: e.target.value })
-
-
-
   })
 
   const submit_payment = async () => {
-
-    let orderId1 = "OID"+ Math.floor(1000000*Math.random())
-
+    let orderId1 = "OID" + Math.floor(1000000 * Math.random())
     let url = `${process.env.NEXT_PUBLIC_STRAPI_URL}api/order/pretransaction`
-
     const rawResponse = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify({ orderId: orderId1.toString(), amount: subtotal, ...form , cart:cart})
+      body: JSON.stringify({ orderId: orderId1.toString(), amount: subtotal, ...form, cart: cart })
     });
-    
-    
+
     const content = await rawResponse.json();
-
-
-  
 
     var config = {
       "root": "",
@@ -69,14 +55,14 @@ const Checkout = ({ cart,userProfile }) => {
     };
 
     if (window.Paytm && window.Paytm.CheckoutJS) {
-    
-        // initialze configuration using init method 
-        window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-          // after successfully updating configuration, invoke JS Checkout
-          window.Paytm.CheckoutJS.invoke();
-        }).catch(function onError(error) {
-          console.log("error => ", error);
-        });
+
+      // initialze configuration using init method 
+      window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+        // after successfully updating configuration, invoke JS Checkout
+        window.Paytm.CheckoutJS.invoke();
+      }).catch(function onError(error) {
+        console.log("error => ", error);
+      });
     }
 
   }
