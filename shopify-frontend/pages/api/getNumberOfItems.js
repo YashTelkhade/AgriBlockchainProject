@@ -1,5 +1,3 @@
-// pages/api/addBlockchainItem.js
-
 import { getNumberOfItemsInSupplyChain } from "../../blockchain/backend/getNumberOfItems";
 
 getNumberOfItemsInSupplyChain

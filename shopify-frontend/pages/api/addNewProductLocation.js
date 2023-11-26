@@ -1,5 +1,3 @@
-// pages/api/addNewProdcutLocation.js
-
 import { addNewProductLocation } from "../../blockchain/backend/addingNewState";
 
 export default async function handler(req, res) {

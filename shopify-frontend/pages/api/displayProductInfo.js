@@ -1,5 +1,3 @@
-// pages/api/productInfo.js
-
 import { getProductInfo } from "../../blockchain/backend/getProductInfo";
 
 

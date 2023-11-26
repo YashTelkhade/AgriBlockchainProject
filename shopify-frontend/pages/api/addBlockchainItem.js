@@ -1,5 +1,3 @@
-// pages/api/addBlockchainItem.js
-
 import { addProductToBlockchain } from "../../blockchain/backend/addingNewItem";
 
 export default async function handler(req, res) {

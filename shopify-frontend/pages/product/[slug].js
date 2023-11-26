@@ -41,8 +41,6 @@ const Slug = ({ product, addToCart }) => {
     }
   }, [product]);
 
-  // Use prodInfo as needed in your component
-console.log(prodInfo) 
   return (
 <div>
   <section className="text-gray-600 body-font overflow-hidden min-h-screen">
@@ -119,6 +117,7 @@ console.log(prodInfo)
           </button>
           <h3 className="text-lg font-medium mb-2">Shipment Stages</h3>
           <ul>
+          {/* This will map all the tracking data to li */}
             {prodInfo?.stages?.map((stage, index) => (
               <li key={index} className="mb-2">
                 <span className="font-semibold">Stage:</span> {stage.stageName}<br />
@@ -132,7 +131,6 @@ console.log(prodInfo)
         </div>
       </div>
     )}
-    {/* ... (your existing code) */}
 	</div>
 	</div>
 	</div>
