@@ -22,7 +22,7 @@ const Product = (props) => {
                 <div className="bg-gray-100 p-6 rounded-lg flex flex-col h-full">
                   <img className="h-40 rounded mb-6 object-cover object-center m-auto" src={item.attributes.ImageURL} alt="content" />
                   <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{item.attributes.Title}</h2>
-                  <h2 className="text-lg text-gray-900 font-medium title-font mb-4">$.{item.attributes.Price}/-</h2>
+                  <h2 className="text-lg text-gray-900 font-medium title-font mb-4">${item.attributes.Price}.00</h2>
                   <p className="leading-relaxed text-base flex-grow">{item.attributes.Description}</p>
                   <Link href={`/product/${item.attributes.Slug}`}>
                     <a className="inline-flex items-center bg-red-600 border-0 py-1 px-4 md:py-2 md:px-6 focus:outline-none hover:bg-blue-400 rounded text-white mt-4 md:mt-6">Buy Now</a>
@@ -39,7 +39,7 @@ const Product = (props) => {
 
 export async function getServerSideProps(context) {
   try {
-    const headers = { Authorization: "Bearer 95d93007cd1a30c891ad4fda71f6be8f3f03f710b51b710582da2b6e61ec660e7cffba71fb5dafb6e1cd808e1cb92c887cecd1115df7a5c00b02d63a7066991b2360f2005db9d39b0d46f61e553ec2b75095ace7926a205d084b09b3e802bfecff638dd9bd3628d2f9f482cbbd00995931dc5a0267b70122cb724a72551b6a08" };
+    const headers = { Authorization: "Bearer 7b025b56031cfb5cc51df3b44ab83358703ea94c7b94ec63afc68d52d2d8cf2c16d4e23046d0b95d7b20feddeff5c04033d976ae01d1be5263851ac61904f811344e0807f927c3fb167704fc940e6db12d4b32b8a3da5195ffe24f7cf9d6019a7af548131de90aed9bbef7ab1a5e8a86df09146767dd2dc2a9ab2962118f3de1" };
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}api/products?populate=*`, { headers });
     const products = await response.json();

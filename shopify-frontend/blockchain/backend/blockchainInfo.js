@@ -83,8 +83,8 @@ var contractABI = [
 ];
 
 const blockchainInfo = {
-    contractAddress: "0xDCd7edb0DfC305A0600f4602B2630fDbE3948800",
-    accountAddress: "0x1ca9E72c0664f699222A24BA67f4eA9c7048fcaa",
+    contractAddress: "0x938F173FB7D80E5Feb3ee17c66fAA0239a3AdB7e",
+    accountAddress: "0x780dB8e23358E22505e87429b06894cCD3ac2404",
     abiOfContract : contractABI,
     endpoint: 'http://127.0.0.1:8545',
 };
